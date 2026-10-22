@@ -1,0 +1,28 @@
+# Development environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.DS_Store
+
+# Generated packages and icons
+build/
+dist/
+*.spec
+*.dmg
+*.zip
+packaging/Convertitore.iconset/
+packaging/icon.png
+packaging/icon.ico
+packaging/icon.icns
+
+# Local media and diagnostics
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.gif
+*.pdf
+*.wav
+*.mp3
