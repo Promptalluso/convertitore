@@ -7,7 +7,7 @@ from pathlib import Path
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
-from .input_files import InputError
+from .input_files import InputError, is_windows_link
 
 MAX_PDF_BYTES = 250 * 1024 * 1024
 MAX_PDF_PAGES = 500
@@ -19,7 +19,7 @@ def validate_pdf(raw: str | Path) -> Path:
         raise InputError('Scegli un PDF locale con percorso assoluto.')
     try:
         info = path.lstat()
-        if not stat.S_ISREG(info.st_mode) or path.is_symlink() or getattr(info, 'st_file_attributes', 0) & 0x400:
+        if not stat.S_ISREG(info.st_mode) or path.is_symlink() or is_windows_link(info):
             raise InputError('Scegli un PDF normale, non un collegamento o una cartella.')
         if not 0 < info.st_size <= MAX_PDF_BYTES:
             raise InputError('Il PDF deve essere non vuoto e non superare 250 MiB.')

@@ -7,7 +7,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from .input_files import InputError
+from .input_files import InputError, is_windows_link
 
 MAX_MEDIA_BYTES = 2 * 1024 * 1024 * 1024
 SF_DATALESS = getattr(stat, 'SF_DATALESS', 0x40000000)
@@ -27,7 +27,7 @@ def validate_media(raw: Path) -> Path:
     try:
         info = path.lstat()
         if (not stat.S_ISREG(info.st_mode) or path.is_symlink()
-                or getattr(info, 'st_file_attributes', 0) & 0x400):
+                or is_windows_link(info)):
             raise InputError('Scegli un file normale, non un collegamento.')
         # An iCloud placeholder makes FFmpeg wait for a download that may never start.
         if getattr(info, 'st_flags', 0) & SF_DATALESS:

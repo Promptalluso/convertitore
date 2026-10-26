@@ -105,7 +105,7 @@ def main() -> None:
         bundle = DIST / "Convertitore"
         copy_notices(bundle)
         shutil.copy2(ffmpeg_source, bundle / "ffmpeg.exe")
-        archive = Path(shutil.make_archive(str(DIST / "Convertitore-Windows-dev"), "zip",
+        archive = Path(shutil.make_archive(str(DIST / f"Convertitore-{VERSION}-Windows"), "zip",
                                            root_dir=DIST, base_dir="Convertitore"))
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
     archive.with_name(archive.name + ".sha256").write_text(

@@ -5,7 +5,7 @@ import re
 import stat
 from pathlib import Path
 
-from .input_files import InputError
+from .input_files import InputError, is_windows_link
 
 MAX_SUBTITLE_BYTES = 5 * 1024 * 1024
 SUBTITLE_SUFFIXES = frozenset({'.srt', '.vtt'})
@@ -19,7 +19,7 @@ def validate_subtitle(raw: Path) -> Path:
     try:
         info = path.lstat()
         if (not stat.S_ISREG(info.st_mode) or path.is_symlink()
-                or getattr(info, 'st_file_attributes', 0) & 0x400
+                or is_windows_link(info)
                 or not 0 < info.st_size <= MAX_SUBTITLE_BYTES
                 or path.suffix.lower() not in SUBTITLE_SUFFIXES):
             raise InputError('Scegli un file SRT o VTT valido, fino a 5 MiB.')
