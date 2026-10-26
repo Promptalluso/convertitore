@@ -11,7 +11,7 @@ from PySide6.QtWidgets import (
 )
 
 from . import theme
-from .input_files import InputError, SUPPORTED_SUFFIXES, validate_source
+from .input_files import InputError, SUPPORTED_SUFFIXES, accept_as_copy, validate_source
 from .image_editor import ImageEditor
 from .audio_editor import AudioEditor, ChannelEditor
 from .video_editor import VideoEditor
@@ -57,7 +57,7 @@ class DropList(QListWidget):
 
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls() and all(url.isLocalFile() for url in event.mimeData().urls()):
-            event.acceptProposedAction()
+            accept_as_copy(event)
         else:
             event.ignore()
 
@@ -66,8 +66,8 @@ class DropList(QListWidget):
 
     def dropEvent(self, event):
         if event.mimeData().hasUrls() and all(url.isLocalFile() for url in event.mimeData().urls()):
-            self.files_dropped.emit([url.toLocalFile() for url in event.mimeData().urls()])
-            event.acceptProposedAction()
+            self.files_dropped.emit([str(Path(url.toLocalFile())) for url in event.mimeData().urls()])
+            accept_as_copy(event)
         else:
             event.ignore()
 

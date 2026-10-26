@@ -126,4 +126,4 @@ class MediaEngineTests(unittest.TestCase):
                                       st_flags=SF_DATALESS)
         with mock.patch.object(Path, 'lstat', return_value=placeholder):
             with self.assertRaisesRegex(InputError, 'iCloud'):
-                validate_media(Path('/Users/test/Desktop/clip.mov'))
+                validate_media(Path(tempfile.gettempdir()).resolve() / 'clip.mov')

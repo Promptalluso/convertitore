@@ -47,3 +47,14 @@ def validate_batch(raws: list[str | Path]) -> list[Path]:
     if not 1 <= len(raws) <= 100:
         raise InputError("Seleziona da 1 a 100 file.")
     return [validate_source(raw) for raw in raws]
+
+
+def accept_as_copy(event) -> None:
+    """Accept a file drop as a copy, never as a move.
+
+    In Windows Explorer, Shift while dragging proposes a move. Accepting that would
+    let Explorer delete the original after the drop.
+    """
+    from PySide6.QtCore import Qt
+    event.setDropAction(Qt.CopyAction)
+    event.accept()

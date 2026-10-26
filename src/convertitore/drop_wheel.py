@@ -12,7 +12,7 @@ from PySide6.QtWidgets import QApplication, QDialog
 from . import theme
 from .drag_sampling import in_default_run_loop
 from .native_glass import attach_glass
-from .input_files import SUPPORTED_SUFFIXES
+from .input_files import SUPPORTED_SUFFIXES, accept_as_copy
 from .media_engine import AUDIO_SUFFIXES, VIDEO_SUFFIXES
 from .subtitle_engine import SUBTITLE_SUFFIXES
 
@@ -126,7 +126,8 @@ class DropWheel(QDialog):
         urls = mime.urls()
         if not urls or not all(url.isLocalFile() for url in urls):
             return []
-        return [url.toLocalFile() for url in urls]
+        # Qt gives forward slashes on Windows; keep the native form everywhere.
+        return [str(Path(url.toLocalFile())) for url in urls]
 
     def configure_for_paths(self, paths: list[str]) -> None:
         self.context_paths = tuple(paths)
@@ -193,7 +194,7 @@ class DropWheel(QDialog):
         paths = self._local_paths(event)
         if paths:
             self.configure_for_paths(paths)
-            event.acceptProposedAction()
+            accept_as_copy(event)
         else:
             event.ignore()
 
@@ -211,7 +212,7 @@ class DropWheel(QDialog):
         self.active_format = self.format_at(event.position().x(), event.position().y())
         self.update()
         if self._local_paths(event) and (self.active_format or (in_center and self.pages)):
-            event.acceptProposedAction()
+            accept_as_copy(event)
         else:
             event.ignore()
 
@@ -233,7 +234,7 @@ class DropWheel(QDialog):
         self.active_format = None
         self.update()
         if target and paths:
-            event.acceptProposedAction()
+            accept_as_copy(event)
             QTimer.singleShot(self.DROP_SETTLE_MS,
                               lambda files=list(paths), action=target:
                               self._emit_after_drag(files, action))

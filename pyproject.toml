@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "convertitore"
-version = "0.7.2"
+version = "0.8.0"
 description = "Convert and edit images, PDFs, video, audio and subtitles locally with a Shift-drag wheel"
 requires-python = ">=3.12,<3.13"
 license = "GPL-3.0-only"

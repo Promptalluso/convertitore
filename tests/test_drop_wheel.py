@@ -133,3 +133,27 @@ class DropWheelTests(unittest.TestCase):
         self.assertEqual(wheel.format_at(160, 60), 'STEREO')
         self.assertEqual(wheel.format_at(70, 105), 'BLEEP')
         wheel.close()
+
+
+class DropActionTests(unittest.TestCase):
+    def test_shift_move_drop_is_accepted_as_copy(self):
+        # Windows Explorer proposes a move while Shift is held; a move would delete the source.
+        app = QApplication.instance() or QApplication([])
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "test.png"
+            path.write_bytes(b"x")
+            wheel = DropWheel()
+            mime = QMimeData()
+            mime.setUrls([QUrl.fromLocalFile(str(path))])
+            enter = QDragEnterEvent(QPoint(160, 60), Qt.CopyAction | Qt.MoveAction, mime,
+                                    Qt.LeftButton, Qt.ShiftModifier)
+            wheel.dragEnterEvent(enter)
+            self.assertEqual(enter.dropAction(), Qt.CopyAction)
+            drop = QDropEvent(QPoint(160, 60), Qt.CopyAction | Qt.MoveAction, mime,
+                              Qt.LeftButton, Qt.ShiftModifier)
+            drop.setDropAction(Qt.MoveAction)
+            wheel.dropEvent(drop)
+            self.assertTrue(drop.isAccepted())
+            self.assertEqual(drop.dropAction(), Qt.CopyAction)
+            wheel.close()
+            app.processEvents()
