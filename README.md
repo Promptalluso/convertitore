@@ -2,17 +2,20 @@
 
 Converti e modifica i tuoi file trascinandoli, senza caricarli su nessun sito.
 
-Tieni premuto **Shift** mentre trascini un file dal Finder: compare una ruota con le azioni possibili per quel file. Lascialo sullo spicchio che ti serve e il risultato viene salvato accanto all'originale. Funziona offline: i file restano sul tuo computer.
+Tieni premuto **Shift** mentre trascini un file dal Finder o da Esplora file: compare una ruota con le azioni possibili per quel file. Lascialo sullo spicchio che ti serve e il risultato viene salvato accanto all'originale. Funziona offline: i file restano sul tuo computer.
 
 Gratis e open source. Creato da [@promptalluso](https://www.instagram.com/promptalluso/).
 
 ## Scarica
 
-**[Scarica l'ultima versione per Mac](../../releases/latest)** (file `.dmg`, Mac con chip Apple M1 o successivi).
+**[Scarica l'ultima versione](../../releases/latest)** e scegli il file per il tuo computer:
 
-Poi segui la **[guida di installazione](INSTALLAZIONE.md)**: la prima volta il Mac chiede una conferma in più, perché l'app non è firmata con un certificato Apple a pagamento.
+- **Mac** con chip Apple (M1 o successivi): il file che finisce in `.dmg`
+- **Windows** 10 o 11 a 64 bit: il file che finisce in `-Windows.zip`
 
-La versione per Mac Intel e quella per Windows non sono ancora pronte.
+Poi segui la **[guida di installazione](INSTALLAZIONE.md)**: la prima volta il computer chiede una conferma in più, perché l'app non è firmata con un certificato a pagamento.
+
+La versione per Mac Intel non è ancora pronta.
 
 ## Cosa fa
 
@@ -26,7 +29,7 @@ La versione per Mac Intel e quella per Windows non sono ancora pronte.
 
 Mentre lavora, in alto sullo schermo compare una pillola che mostra l'avanzamento e poi il risultato, con un pulsante per aprire il file nel Finder.
 
-C'è anche una finestra completa, dal menu dell'icona nella barra in alto, per convertire fino a 100 file insieme.
+C'è anche una finestra completa, dal menu dell'icona nella barra in alto (su Windows nell'area di notifica), per convertire fino a 100 file insieme.
 
 ## Privacy
 
@@ -36,9 +39,10 @@ Non è uno strumento di anonimizzazione: la rimozione dei metadati crea un PNG n
 
 ## Limiti di questa versione
 
-- Solo Mac con chip Apple. L'app non è firmata né autenticata da Apple: la [guida](INSTALLAZIONE.md) spiega come aprirla.
+- Mac con chip Apple e Windows 10/11 a 64 bit. L'app non è firmata: la [guida](INSTALLAZIONE.md) spiega come aprirla la prima volta.
 - I file su iCloud devono essere scaricati sul Mac (nel Finder: tasto destro > Scarica ora).
-- L'app non si avvia da sola all'accensione del Mac.
+- L'app non si avvia da sola all'accensione del computer.
+- Su Windows il materiale vetro di macOS non c'è: finestre e ruota hanno uno sfondo pieno.
 
 ## Per sviluppatori
 
