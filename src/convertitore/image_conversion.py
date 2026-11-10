@@ -17,7 +17,7 @@ def encode_image(source: Path, target: str, stage: Path) -> None:
             if getattr(original, "n_frames", 1) != 1:
                 raise InputError("Le immagini animate o con più pagine non sono supportate.")
             if original.width * original.height > MAX_PIXELS:
-                raise InputError("L'immagine supera il limite di 40 megapixel.")
+                raise InputError("L'immagine supera il limite di 50 megapixel.")
             original.load()
             with ImageOps.exif_transpose(original) as oriented:
                 with oriented.convert("RGBA") as pixels:

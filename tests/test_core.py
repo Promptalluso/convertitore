@@ -105,7 +105,7 @@ class ImageConversionTests(unittest.TestCase):
 
         class LargeImage:
             width = 10_000
-            height = 5_000
+            height = 6_000
             n_frames = 1
             def __enter__(self): return self
             def __exit__(self, *_): return None

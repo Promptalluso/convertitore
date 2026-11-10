@@ -21,6 +21,7 @@ from PySide6.QtWidgets import QApplication, QDialog
 from reportlab.pdfgen import canvas as pdf_canvas
 
 from convertitore.audio_editor import AudioEditor
+import convertitore.input_files  # noqa: F401  registers the HEIC opener for the samples
 from convertitore.background import BackgroundController
 from convertitore.drop_wheel import DropWheel
 from convertitore.image_editor import ImageEditor
@@ -45,6 +46,8 @@ def _make_samples(root: Path) -> dict[str, list[Path]]:
     image.save(logo)
     photo = root / 'foto.jpg'
     Image.new('RGB', (640, 480), (120, 160, 200)).save(photo, quality=90)
+    iphone = root / 'IMG_0001.heic'
+    Image.new('RGB', (640, 480), (90, 140, 180)).save(iphone, format='HEIF')
     pdfs = []
     for name in ('uno.pdf', 'due.pdf'):
         path = root / name
@@ -67,7 +70,7 @@ def _make_samples(root: Path) -> dict[str, list[Path]]:
             '-ac', '2', str(audio))
     subtitles = root / 'sottotitoli.srt'
     subtitles.write_text('1\n00:00:00,000 --> 00:00:01,500\nCiao a tutti\n', encoding='utf-8')
-    return {'png': [logo], 'jpg': [photo], 'png+jpg': [logo, photo], 'pdf': [pdfs[0]],
+    return {'png': [logo], 'jpg': [photo], 'heic': [iphone], 'png+jpg': [logo, photo], 'pdf': [pdfs[0]],
             'pdf+pdf': pdfs, 'video': [videos[0]], 'video+video': videos,
             'audio': [audio], 'srt': [subtitles]}
 

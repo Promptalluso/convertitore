@@ -21,7 +21,7 @@ La versione per Mac Intel non è ancora pronta.
 
 | File | Azioni |
 |---|---|
-| Foto | PNG, JPEG, WebP, AVIF, TIFF, BMP, GIF, PDF. Modifica (esposizione, contrasto, saturazione, nitidezza), sfondo, annotazioni, ritaglio, area oscurata, rimozione dei metadati, testo dalla foto (OCR), riduzione, rotazione, compressione |
+| Foto (anche HEIC dell'iPhone) | PNG, JPEG, WebP, AVIF, TIFF, BMP, GIF, PDF. Modifica (esposizione, contrasto, saturazione, nitidezza), sfondo, annotazioni, ritaglio, area oscurata, rimozione dei metadati, testo dalla foto (OCR), riduzione, rotazione, compressione |
 | PDF | Unisci, dividi, ruota, estrai pagine, comprimi, ottimizza, esporta il testo, rendi ricercabile un PDF scansionato (OCR), pagine in PNG, JPEG o WebP |
 | Video | MP4, MOV, WebM, MKV, GIF, MP3. Comprimi, 720p, 1080p, taglia, dividi, ritaglia, cambia velocità, copri un'area con un rettangolo nero, salva un fotogramma, unisci più video |
 | Audio | MP3, M4A, WAV, FLAC. Comprimi, taglia, mono, stereo, livello dei canali, normalizza il volume, bip su un intervallo |

@@ -34,7 +34,7 @@ def render_pdf_pages(source: Path, target: str, stage_dir: Path,
                 if (not math.isfinite(width) or not math.isfinite(height)
                         or width <= 0 or height <= 0
                         or math.ceil(width * scale) * math.ceil(height * scale) > MAX_PIXELS):
-                    raise InputError('Una pagina supera il limite di 40 megapixel.')
+                    raise InputError('Una pagina supera il limite di 50 megapixel.')
                 bitmap = page.render(scale=scale)
                 try:
                     image = bitmap.to_pil()
@@ -70,7 +70,7 @@ def images_to_pdf(sources: list[Path], stage_dir: Path) -> list[Path]:
                 if getattr(original, 'n_frames', 1) != 1:
                     raise InputError('Le immagini animate non possono diventare pagine PDF.')
                 if original.width * original.height > MAX_PIXELS:
-                    raise InputError('Un’immagine supera il limite di 40 megapixel.')
+                    raise InputError('Un’immagine supera il limite di 50 megapixel.')
                 original.load()
                 with ImageOps.exif_transpose(original) as oriented:
                     with oriented.convert('RGBA') as rgba:

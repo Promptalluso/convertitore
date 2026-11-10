@@ -16,7 +16,7 @@ PACKAGE = ROOT / "packaging"
 sys.path.insert(0, str(ROOT / "src"))
 from convertitore.version import VERSION  # noqa: E402
 
-DEPENDENCIES = ("Pillow", "PySide6-Essentials", "shiboken6", "pypdf", "pypdfium2", "imageio-ffmpeg", "rapidocr", "onnxruntime", "reportlab", "pyinstaller")
+DEPENDENCIES = ("Pillow", "pillow-heif", "PySide6-Essentials", "shiboken6", "pypdf", "pypdfium2", "imageio-ffmpeg", "rapidocr", "onnxruntime", "reportlab", "pyinstaller")
 
 
 def copy_notices(bundle: Path) -> None:
@@ -58,7 +58,7 @@ def main() -> None:
     ffmpeg_source = Path(imageio_ffmpeg.get_ffmpeg_exe())
     command = [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean",
                "--windowed", "--onedir", "--name", "Convertitore",
-               "--paths", str(ROOT / "src"), "--collect-data", "rapidocr",
+               "--paths", str(ROOT / "src"), "--collect-data", "rapidocr", "--collect-all", "pillow_heif",
                "--icon", str(icon), str(PACKAGE / "entry.py")]
     target_arch = os.environ.get("CONVERTITORE_TARGET_ARCH")
     if target_arch:

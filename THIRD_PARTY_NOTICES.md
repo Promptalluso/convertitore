@@ -14,6 +14,7 @@ This application uses a different name and original icon. It does not include th
 - Python 3.12: Python Software Foundation License. https://docs.python.org/3/license.html
 - Pillow 13.0.0: HPND. https://github.com/python-pillow/Pillow/blob/main/LICENSE
 - PySide6-Essentials and shiboken6 6.12.0: LGPL-3.0-only or GPL alternatives. Qt libraries remain dynamically linked in the package. https://doc.qt.io/qtforpython-6/licenses.html
+- pillow-heif 1.8.1: BSD-3-Clause, with bundled libheif (LGPL-3.0), libde265 (LGPL-3.0) and x265 (GPL-2.0-or-later). https://github.com/bigcat88/pillow_heif
 - pypdf 6.21.1: BSD-3-Clause. https://github.com/py-pdf/pypdf/blob/main/LICENSE
 - pypdfium2 5.14.0 and bundled PDFium: Apache-2.0/BSD-3-Clause and PDFium dependency licenses. https://github.com/pypdfium2-team/pypdfium2
 - imageio-ffmpeg 0.6.0 Python wrapper: BSD-2-Clause. https://github.com/imageio/imageio-ffmpeg

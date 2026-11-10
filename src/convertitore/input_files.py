@@ -4,9 +4,15 @@ import os
 import stat
 from pathlib import Path
 
+from pillow_heif import register_heif_opener
+
+# iPhone photos: lets every Image.open in the app read HEIC/HEIF.
+register_heif_opener()
+
 MAX_BYTES = 100 * 1024 * 1024
-MAX_PIXELS = 40_000_000
-SUPPORTED_SUFFIXES = frozenset({".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp", ".gif", ".avif"})
+MAX_PIXELS = 50_000_000  # iPhone Pro 48 MP photos are 8064 x 6048
+SUPPORTED_SUFFIXES = frozenset({".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp", ".gif",
+                                ".avif", ".heic", ".heif"})
 
 
 class InputError(ValueError):

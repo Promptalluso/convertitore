@@ -35,6 +35,20 @@ def main() -> int:
         with Image.open(payload["output"]) as image:
             if image.format != "JPEG" or image.size != (2, 2):
                 raise RuntimeError("Il JPEG confezionato non è valido.")
+        # iPhone photo: proves the HEIC decoder is inside the package.
+        from pillow_heif import register_heif_opener
+        register_heif_opener()
+        heic = Path(tmp) / "iphone.heic"
+        Image.new("RGB", (16, 8), "teal").save(heic, format="HEIF")
+        request = json.dumps({"source": str(heic), "target": "JPEG", "output_dir": tmp}).encode()
+        result = subprocess.run([str(executable), "--worker"], input=request,
+                                capture_output=True, timeout=30, check=False)
+        payload = json.loads(result.stdout)
+        if result.returncode != 0 or not payload.get("ok"):
+            raise RuntimeError(payload.get("error", "HEIC confezionato non funziona."))
+        with Image.open(payload["output"]) as image:
+            if image.format != "JPEG" or image.size != (16, 8):
+                raise RuntimeError("Il JPEG da HEIC confezionato non è valido.")
         for target, expected in (("TIFF", "TIFF"), ("BMP", "BMP"),
                                  ("GIF", "GIF"), ("AVIF", "AVIF")):
             request = json.dumps({"source": str(source), "target": target,
@@ -185,7 +199,7 @@ def main() -> int:
                              env=env, capture_output=True, check=False)
     if startup.returncode != 0:
         raise RuntimeError(startup.stderr.decode("utf-8", "replace")[-1000:])
-    print("Package smoke passed: image, PDF, video crop/trim, MP3, subtitles, offline OCR and Qt startup")
+    print("Package smoke passed: image, HEIC, PDF, video crop/trim, MP3, subtitles, offline OCR and Qt startup")
     return 0
 
 

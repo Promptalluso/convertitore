@@ -87,7 +87,7 @@ def run_image_action(action: str, source: Path, options: dict,
             if getattr(original, 'n_frames', 1) != 1:
                 raise InputError('Seleziona un’immagine non animata.')
             if original.width * original.height > MAX_PIXELS:
-                raise InputError('L’immagine supera 40 megapixel.')
+                raise InputError('L’immagine supera 50 megapixel.')
             if action == 'image.metadata':
                 lines = [f'File: {source.name}', f'Dimensioni: {original.width} × {original.height}',
                          f'Formato: {original.format or source.suffix.upper()}', '']
@@ -138,7 +138,7 @@ def run_image_action(action: str, source: Path, options: dict,
                             raise InputError('Scegli un margine tra 0 e 100%.')
                         margin = round(min(pixels.size) * padding / 100)
                         if (pixels.width + 2 * margin) * (pixels.height + 2 * margin) > MAX_PIXELS:
-                            raise InputError('Lo sfondo supera il limite di 40 megapixel.')
+                            raise InputError('Lo sfondo supera il limite di 50 megapixel.')
                         result = background_surface((pixels.width + 2 * margin,
                                                      pixels.height + 2 * margin), options)
                         result.paste(pixels, (margin, margin), pixels)

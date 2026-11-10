@@ -70,7 +70,7 @@ def ocr_to_text(source: Path, stage: Path) -> list[Path]:
                     try:
                         width, height = page.get_size()
                         if width * height * 4 > MAX_PIXELS:
-                            raise InputError('Una pagina supera il limite OCR di 40 megapixel.')
+                            raise InputError('Una pagina supera il limite OCR di 50 megapixel.')
                         bitmap = page.render(scale=2)
                         try:
                             image = bitmap.to_pil()
@@ -92,7 +92,7 @@ def ocr_to_text(source: Path, stage: Path) -> list[Path]:
         else:
             with Image.open(source) as image:
                 if image.width * image.height > MAX_PIXELS:
-                    raise InputError('L’immagine supera il limite OCR di 40 megapixel.')
+                    raise InputError('L’immagine supera il limite OCR di 50 megapixel.')
                 chunk = _text(engine, image) + '\n'
             if len(chunk.encode('utf-8')) > MAX_OCR_TEXT:
                 raise InputError('Il testo OCR supera 25 MiB.')
@@ -113,7 +113,7 @@ def ocr_searchable_pdf(source: Path, stage: Path) -> list[Path]:
             try:
                 width, height = page.get_size()
                 if width * height * 4 > MAX_PIXELS:
-                    raise InputError('Una pagina supera il limite OCR di 40 megapixel.')
+                    raise InputError('Una pagina supera il limite OCR di 50 megapixel.')
                 bitmap = page.render(scale=2)
                 try:
                     image = bitmap.to_pil()

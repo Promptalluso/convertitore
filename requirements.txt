@@ -1,4 +1,5 @@
 Pillow==13.0.0
+pillow-heif==1.8.1
 PySide6-Essentials==6.12.0
 shiboken6==6.12.0
 pypdf==6.21.1
